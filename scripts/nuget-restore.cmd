@@ -7,8 +7,9 @@ set maxRetries=3
 nuget restore %*
 
 rem problem?
+@echo Nuget restore exited with code %ERRORLEVEL%
 IF NOT ERRORLEVEL 1 GOTO :EOF
-@echo Oops, nuget restore exited with code %ERRORLEVEL% - let us try again!
+@echo Retrying
 set /a retryNumber=%retryNumber%+1
 IF %reTryNumber% LSS %maxRetries% (GOTO :RESTORE)
 @echo Sorry, we tried restoring nuget packages for %maxRetries% times and all attempts were unsuccessful!
